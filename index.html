@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="agencyOne – Agence marketing digital Genève. SEO technique, community management authentique et croissance mesurable.">
+    <meta name="description" content="agencyOne – Agence marketing digital Genève. SEO technique, community authentique et croissance mesurable.">
     <title>agencyOne | Marketing Digital Précis • Genève</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
@@ -39,11 +39,12 @@
     <section class="relative min-h-screen flex items-center overflow-hidden">
         <canvas id="hero-canvas" class="hero-canvas"></canvas>
 
-        <div id="controls" class="flex items-center gap-3 bg-slate-900/80 backdrop-blur-md px-5 py-3 rounded-3xl border border-white/10">
-            <button id="pauseBtn" onclick="toggleAnimation()" 
-                    class="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-sm font-medium transition">
-                <i id="pauseIcon" class="fas fa-pause"></i>
-                <span id="pauseText">Pause</span>
+        <!-- Bouton Play / Pause amélioré -->
+        <div id="controls" class="flex items-center gap-3 bg-slate-900/80 backdrop-blur-md px-6 py-3 rounded-3xl border border-white/10">
+            <button onclick="toggleAnimation()" 
+                    class="flex items-center gap-3 px-6 py-3 bg-slate-800 hover:bg-slate-700 rounded-2xl text-sm font-medium transition-all active:scale-95">
+                <i id="pauseIcon" class="fas fa-pause text-cyan-400"></i>
+                <span id="pauseText" class="text-white">Pause animation</span>
             </button>
         </div>
 
@@ -54,61 +55,37 @@
                 Nous connectons.<br>Nous amplifions.<br>Nous mesurons.
             </h1>
             <p class="text-xl text-slate-300 max-w-xl mx-auto mb-12">
-                Agence marketing digital genevoise spécialisée en SEO technique, community authentique et stratégies data-driven.
+                Agence marketing digital genevoise. SEO technique, community authentique et stratégies data-driven.
             </p>
             <a href="#contact" class="inline-flex items-center gap-3 bg-cyan-400 hover:bg-white text-slate-950 px-10 py-6 rounded-3xl text-xl font-semibold transition-all">Obtenir mon audit gratuit</a>
         </div>
     </section>
 
-    <!-- Sections simplifiées (pour éviter tout problème de chargement) -->
+    <!-- Autres sections (simplifiées pour test) -->
     <section id="different" class="max-w-7xl mx-auto px-8 py-24 bg-slate-900">
-        <div class="text-center mb-16">
-            <h2 class="heading text-5xl">Pourquoi agencyOne est différent</h2>
-        </div>
+        <h2 class="heading text-5xl text-center mb-16">Pourquoi agencyOne est différent</h2>
         <div class="grid md:grid-cols-3 gap-10">
-            <div class="glass p-10 rounded-3xl">
-                <i class="fas fa-code text-4xl mb-6 text-cyan-400"></i>
-                <h3 class="text-2xl font-semibold mb-4">Code-First Growth</h3>
-                <p class="text-slate-400">Outils et dashboards développés en interne pour une transparence totale.</p>
-            </div>
-            <div class="glass p-10 rounded-3xl">
-                <i class="fas fa-map-marker-alt text-4xl mb-6 text-cyan-400"></i>
-                <h3 class="text-2xl font-semibold mb-4">Ancrés à Genève</h3>
-                <p class="text-slate-400">Connaissance fine du marché suisse et conformité LPD/RGPD.</p>
-            </div>
-            <div class="glass p-10 rounded-3xl">
-                <i class="fas fa-chart-line text-4xl mb-6 text-cyan-400"></i>
-                <h3 class="text-2xl font-semibold mb-4">Transparence totale</h3>
-                <p class="text-slate-400">Accès live à tous les résultats.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services, Calculateur, Contact... (simplifiés pour test rapide) -->
-    <section id="services" class="max-w-7xl mx-auto px-8 py-24">
-        <h2 class="heading text-5xl text-center mb-16">Nos expertises</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="p-10 border border-white/10 rounded-3xl">🔍 SEO Technique & Local</div>
-            <div class="p-10 border border-white/10 rounded-3xl">📣 Marketing Digital</div>
-            <div class="p-10 border border-white/10 rounded-3xl">👥 Community Management</div>
+            <div class="glass p-10 rounded-3xl">Code-First Growth</div>
+            <div class="glass p-10 rounded-3xl">Ancrés à Genève</div>
+            <div class="glass p-10 rounded-3xl">Transparence totale</div>
         </div>
     </section>
 
     <section id="contact" class="max-w-7xl mx-auto px-8 py-24 text-center">
         <h2 class="heading text-5xl mb-8">Prêt à connecter votre croissance ?</h2>
-        <a href="mailto:contact@agencyone.ch" class="inline-flex items-center gap-3 bg-cyan-400 text-slate-950 px-10 py-6 rounded-3xl text-xl font-semibold">Contactez-nous</a>
+        <a href="mailto:contact@agencyone.ch" class="inline-flex items-center gap-3 bg-cyan-400 text-slate-950 px-10 py-6 rounded-3xl text-xl font-semibold">Me contacter</a>
     </section>
 
-    <footer class="bg-black py-12 text-center text-slate-400">
+    <footer class="bg-black py-12 text-center text-slate-400 text-sm">
         © 2026 agencyOne – Genève, Suisse
     </footer>
 
     <script>
-        // 3D Animation (réseau + flux lumineux)
+        // === 3D ANIMATION CORRIGÉE - TOURNE EN ILLIMITÉ ===
         const canvas = document.getElementById('hero-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -139,34 +116,20 @@
 
         camera.position.z = isMobile ? 32 : 26;
 
-        let mouseX = 0, mouseY = 0, isPaused = false;
+        let mouseX = 0, mouseY = 0;
+        let isPaused = false;
+        let animationFrameId = null;
 
-        window.addEventListener('mousemove', e => {
-            if (isPaused) return;
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        function getDist(p1, p2) {
-            return Math.hypot(p1.position.x - p2.position.x, p1.position.y - p2.position.y, p1.position.z - p2.position.z);
-        }
-
-        function createFlow(start, end) {
-            const geo = new THREE.SphereGeometry(0.08, 8, 8);
-            const p = new THREE.Mesh(geo, flowMat);
-            p.position.copy(start.position);
-            p.userData = { progress: 0, start: start.position.clone(), end: end.position.clone(), speed: 0.02 + Math.random()*0.015 };
-            scene.add(p);
-            dataFlows.push(p);
-        }
-
+        // Fonction principale qui tourne en boucle infinie
         function animate() {
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
+
             if (isPaused) {
                 renderer.render(scene, camera);
                 return;
             }
 
+            // Mise à jour des particules
             particles.forEach(p => {
                 p.position.x += p.userData.vx;
                 p.position.y += p.userData.vy;
@@ -183,12 +146,17 @@
                 if (Math.abs(p.position.y) > 9) p.userData.vy *= -0.9;
             });
 
+            // Connexions + flux lumineux
             connections.forEach(l => scene.remove(l));
             connections.length = 0;
 
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
-                    const dist = getDist(particles[i], particles[j]);
+                    const dist = Math.hypot(
+                        particles[i].position.x - particles[j].position.x,
+                        particles[i].position.y - particles[j].position.y,
+                        particles[i].position.z - particles[j].position.z
+                    );
                     if (dist < 6 && dist > 1.2) {
                         const points = [particles[i].position, particles[j].position];
                         const geo = new THREE.BufferGeometry().setFromPoints(points);
@@ -196,11 +164,14 @@
                         scene.add(line);
                         connections.push(line);
 
-                        if (Math.random() < 0.04) createFlow(particles[i], particles[j]);
+                        if (Math.random() < 0.035) {
+                            createFlow(particles[i], particles[j]);
+                        }
                     }
                 }
             }
 
+            // Animation des flux lumineux
             for (let i = dataFlows.length - 1; i >= 0; i--) {
                 const f = dataFlows[i];
                 f.userData.progress += f.userData.speed;
@@ -214,21 +185,41 @@
 
             renderer.render(scene, camera);
         }
-        animate();
 
-        // Pause / Play
+        function createFlow(start, end) {
+            const geo = new THREE.SphereGeometry(0.08, 8, 8);
+            const p = new THREE.Mesh(geo, flowMat);
+            p.position.copy(start.position);
+            p.userData = { 
+                progress: 0, 
+                start: start.position.clone(), 
+                end: end.position.clone(), 
+                speed: 0.018 + Math.random() * 0.015 
+            };
+            scene.add(p);
+            dataFlows.push(p);
+        }
+
+        // Contrôle Play / Pause
         function toggleAnimation() {
             isPaused = !isPaused;
             const icon = document.getElementById('pauseIcon');
-            const txt = document.getElementById('pauseText');
+            const text = document.getElementById('pauseText');
+
             if (isPaused) {
                 icon.classList.replace('fa-pause', 'fa-play');
-                txt.textContent = 'Play';
+                text.textContent = 'Reprendre animation';
             } else {
                 icon.classList.replace('fa-play', 'fa-pause');
-                txt.textContent = 'Pause';
+                text.textContent = 'Pause animation';
             }
         }
+
+        // Mouse interaction
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
 
         // Resize
         window.addEventListener('resize', () => {
@@ -236,6 +227,9 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        // Démarrer l'animation en illimité
+        animate();
     </script>
 </body>
 </html>
