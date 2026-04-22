@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="agencyOne – Agence marketing digital Genève. SEO technique, community authentique et croissance mesurable. Swiss precision.">
+    <title>agencyOne | Marketing Digital Précis • Genève</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .heading { font-family: 'Space Grotesk', sans-serif; }
+        .hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .glass { background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(20px); }
+        #controls { position: absolute; top: 120px; right: 30px; z-index: 20; }
+    </style>
+</head>
+<body class="bg-slate-950 text-white overflow-x-hidden">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-cyan-400 rounded-2xl flex items-center justify-center text-slate-950 font-bold text-2xl">1</div>
+                <h1 class="heading text-3xl tracking-tighter">agencyOne</h1>
+            </div>
+            <div class="hidden md:flex gap-10 text-sm font-medium">
+                <a href="#services" class="hover:text-cyan-400 transition">Services</a>
+                <a href="#different" class="hover:text-cyan-400 transition">Pourquoi nous</a>
+                <a href="#calculateur" class="hover:text-cyan-400 transition">Calculez votre croissance</a>
+            </div>
+            <a href="#contact" class="px-8 py-4 bg-white text-slate-950 rounded-3xl font-semibold hover:bg-cyan-400 transition">Audit gratuit</a>
+        </div>
+    </nav>
+
+    <!-- HERO 3D AVEC FLUX DE DONNÉES + CONTRÔLES -->
+    <section class="relative min-h-screen flex items-center overflow-hidden">
+        <canvas id="hero-canvas" class="hero-canvas"></canvas>
+
+        <!-- Contrôles 3D -->
+        <div id="controls" class="flex items-center gap-3 bg-slate-900/80 backdrop-blur-md px-5 py-3 rounded-3xl border border-white/10">
+            <button id="pauseBtn" onclick="toggleAnimation()" 
+                    class="flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-sm font-medium transition">
+                <i id="pauseIcon" class="fas fa-pause"></i>
+                <span id="pauseText">Pause</span>
+            </button>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-8 pt-20 text-center">
+            <div class="inline-flex bg-white/10 px-6 py-2.5 rounded-3xl text-cyan-400 text-sm mb-8 border border-white/20">Genève • Swiss precision growth</div>
+            
+            <h1 class="heading text-6xl md:text-7xl lg:text-8xl leading-none tracking-tighter mb-8">
+                Nous connectons.<br>Nous amplifions.<br>Nous mesurons.
+            </h1>
+            <p class="text-xl text-slate-300 max-w-xl mx-auto mb-12">
+                Agence marketing digital genevoise. SEO technique, community authentique et stratégies data-driven.<br>
+                Un réseau vivant qui transforme votre visibilité en croissance réelle.
+            </p>
+            <a href="#contact" class="inline-flex items-center gap-3 bg-cyan-400 hover:bg-white text-slate-950 px-10 py-6 rounded-3xl text-xl font-semibold transition-all">Obtenir mon audit gratuit</a>
+        </div>
+
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs text-slate-400 flex items-center gap-2 z-20">
+            <div class="w-2 h-px bg-cyan-400"></div>
+            Déplacez votre souris → observez le flux de données
+        </div>
+    </section>
+
+    <!-- POURQUOI NOUS -->
+    <section id="different" class="max-w-7xl mx-auto px-8 py-24 bg-slate-900">
+        <div class="text-center mb-16">
+            <span class="text-cyan-400 uppercase text-sm tracking-widest">Ce qui nous distingue</span>
+            <h2 class="heading text-5xl mt-3">Pas une agence comme les autres</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-10">
+            <div class="glass p-10 rounded-3xl">
+                <i class="fas fa-code text-4xl mb-6 text-cyan-400"></i>
+                <h3 class="text-2xl font-semibold mb-4">Code-First Growth</h3>
+                <p class="text-slate-400">Je développe moi-même les outils internes. Chaque stratégie est un système technique propre et scalable.</p>
+            </div>
+            <div class="glass p-10 rounded-3xl">
+                <i class="fas fa-map-marker-alt text-4xl mb-6 text-cyan-400"></i>
+                <h3 class="text-2xl font-semibold mb-4">Ancrés à Genève</h3>
+                <p class="text-slate-400">Connaissance fine du marché suisse : multilingue, conformité LPD/RGPD stricte.</p>
+            </div>
+            <div class="glass p-10 rounded-3xl">
+                <i class="fas fa-chart-line text-4xl mb-6 text-cyan-400"></i>
+                <h3 class="text-2xl font-semibold mb-4">Transparence totale</h3>
+                <p class="text-slate-400">Accès live à tous les metrics. Pas de black-box.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="max-w-7xl mx-auto px-8 py-24">
+        <h2 class="heading text-5xl text-center mb-16">Nos expertises</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="p-10 border border-white/10 rounded-3xl hover:border-cyan-400 transition-all">
+                <div class="text-5xl mb-6">🔍</div>
+                <h3 class="text-3xl font-semibold">SEO Technique & Local</h3>
+                <p class="text-slate-400 mt-4">Positionnement Google Suisse et Europe. Audit technique + stratégie sémantique.</p>
+            </div>
+            <div class="p-10 border border-white/10 rounded-3xl hover:border-cyan-400 transition-all">
+                <div class="text-5xl mb-6">📣</div>
+                <h3 class="text-3xl font-semibold">Marketing Digital</h3>
+                <p class="text-slate-400 mt-4">Campagnes performantes Meta, Google, LinkedIn. Copywriting qui convertit.</p>
+            </div>
+            <div class="p-10 border border-white/10 rounded-3xl hover:border-cyan-400 transition-all">
+                <div class="text-5xl mb-6">👥</div>
+                <h3 class="text-3xl font-semibold">Community Management</h3>
+                <p class="text-slate-400 mt-4">Communautés vivantes et rentables. Contenu qui fidélise réellement.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATEUR -->
+    <section id="calculateur" class="max-w-7xl mx-auto px-8 py-24 bg-slate-900 rounded-3xl mx-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="heading text-5xl mb-8">Estimez votre croissance potentielle</h2>
+            <div class="glass p-10 rounded-3xl">
+                <label class="block text-left text-sm mb-3">Votre CA mensuel actuel (CHF)</label>
+                <input id="ca" type="number" value="50000" class="w-full bg-slate-800 px-6 py-5 rounded-2xl text-3xl focus:outline-none focus:border-cyan-400">
+                <button onclick="calculateGrowth()" class="mt-10 w-full py-6 bg-cyan-400 text-slate-950 text-xl font-semibold rounded-3xl hover:scale-105 transition">Voir le potentiel en 6 mois</button>
+                <div id="result" class="mt-10 text-4xl font-semibold text-cyan-400 hidden">
+                    Votre CA pourrait atteindre <span id="caFinal" class="text-5xl"></span> CHF
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="max-w-7xl mx-auto px-8 py-24">
+        <div class="glass rounded-3xl p-12 md:p-16 grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="heading text-5xl">Prêt à connecter votre croissance ?</h2>
+                <p class="text-xl text-slate-300 mt-8">Audit gratuit de 45 minutes : diagnostic technique précis + recommandations concrètes.</p>
+            </div>
+            <form onsubmit="handleSubmit(event)" class="space-y-6">
+                <input type="text" placeholder="Votre prénom" class="w-full px-6 py-5 bg-slate-800 rounded-2xl" required>
+                <input type="email" placeholder="Email professionnel" class="w-full px-6 py-5 bg-slate-800 rounded-2xl" required>
+                <textarea rows="4" placeholder="Votre site actuel + objectif principal" class="w-full px-6 py-5 bg-slate-800 rounded-2xl"></textarea>
+                <button type="submit" class="w-full py-7 bg-white text-slate-950 font-semibold text-xl rounded-3xl">Envoyer → recevoir mon audit</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 text-slate-400 text-sm border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            © 2026 agencyOne – Genève, Suisse<br>
+            <span class="text-cyan-400">Développé avec précision • Animation 3D interactive</span>
+        </div>
+    </footer>
+
+    <script>
+        // === 3D AVANCÉE : RÉSEAU + FLUX DE DONNÉES + PAUSE/PLAY ===
+        const canvas = document.getElementById('hero-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        scene.add(new THREE.AmbientLight(0x22d3ee, 0.6));
+        const pointLight = new THREE.PointLight(0xa855f7, 2, 100);
+        pointLight.position.set(15, 20, 25);
+        scene.add(pointLight);
+
+        const particles = [];
+        const connections = [];
+        const dataFlows = []; // Particules lumineuses qui voyagent
+
+        // Nombre de points adapté selon device
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+        const particleCount = isMobile ? 65 : 120;
+
+        for (let i = 0; i < particleCount; i++) {
+            const size = 0.12 + Math.random() * 0.16;
+            const geometry = new THREE.SphereGeometry(size, 16, 16);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x22d3ee,
+                emissive: 0x22d3ee,
+                shininess: 8,
+                transparent: true,
+                opacity: 0.9
+            });
+            const sphere = new THREE.Mesh(geometry, material);
+            sphere.position.set(
+                (Math.random() - 0.5) * 28,
+                (Math.random() - 0.5) * 18,
+                (Math.random() - 0.5) * 12 - 8
+            );
+            sphere.userData = { vx: (Math.random() - 0.5) * 0.018, vy: (Math.random() - 0.5) * 0.018 };
+            scene.add(sphere);
+            particles.push(sphere);
+        }
+
+        const lineMaterial = new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.25 });
+
+        // Matériau pour les flux lumineux
+        const flowMaterial = new THREE.MeshBasicMaterial({ color: 0x67e8f9, transparent: true, opacity: 0.9 });
+
+        camera.position.z = isMobile ? 32 : 26;
+
+        let mouseX = 0, mouseY = 0;
+        let isPaused = false;
+
+        window.addEventListener('mousemove', (e) => {
+            if (isPaused) return;
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        function getDistance(p1, p2) {
+            return Math.hypot(p1.position.x - p2.position.x, p1.position.y - p2.position.y, p1.position.z - p2.position.z);
+        }
+
+        function createDataFlow(start, end) {
+            const geometry = new THREE.SphereGeometry(0.08, 8, 8);
+            const particle = new THREE.Mesh(geometry, flowMaterial);
+            particle.position.copy(start.position);
+            particle.userData = {
+                progress: 0,
+                start: start.position.clone(),
+                end: end.position.clone(),
+                speed: 0.015 + Math.random() * 0.012
+            };
+            scene.add(particle);
+            dataFlows.push(particle);
+        }
+
+        function animate() {
+            if (isPaused) {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+                return;
+            }
+
+            requestAnimationFrame(animate);
+
+            particles.forEach(p => {
+                p.position.x += p.userData.vx;
+                p.position.y += p.userData.vy;
+
+                const dx = p.position.x - mouseX * 14;
+                const dy = p.position.y - mouseY * 10;
+                const dist = Math.hypot(dx, dy);
+                if (dist < 13 && dist > 0.5) {
+                    p.position.x += (dx / dist) * 0.15;
+                    p.position.y += (dy / dist) * 0.15;
+                }
+
+                if (Math.abs(p.position.x) > 14) p.userData.vx *= -0.9;
+                if (Math.abs(p.position.y) > 9) p.userData.vy *= -0.9;
+
+                p.rotation.y += 0.007;
+            });
+
+            // Nettoyage et création des connexions + flux
+            connections.forEach(l => scene.remove(l));
+            connections.length = 0;
+
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dist = getDistance(particles[i], particles[j]);
+                    if (dist < 6 && dist > 1.2) {
+                        const points = [particles[i].position, particles[j].position];
+                        const geo = new THREE.BufferGeometry().setFromPoints(points);
+                        const line = new THREE.Line(geo, lineMaterial);
+                        scene.add(line);
+                        connections.push(line);
+
+                        // Création occasionnelle de flux lumineux
+                        if (Math.random() < 0.035) {
+                            createDataFlow(particles[i], particles[j]);
+                        }
+                    }
+                }
+            }
+
+            // Animation des flux lumineux
+            for (let i = dataFlows.length - 1; i >= 0; i--) {
+                const flow = dataFlows[i];
+                flow.userData.progress += flow.userData.speed;
+                if (flow.userData.progress >= 1) {
+                    scene.remove(flow);
+                    dataFlows.splice(i, 1);
+                    continue;
+                }
+                flow.position.lerpVectors(flow.userData.start, flow.userData.end, flow.userData.progress);
+            }
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Contrôle Pause / Play
+        function toggleAnimation() {
+            isPaused = !isPaused;
+            const icon = document.getElementById('pauseIcon');
+            const text = document.getElementById('pauseText');
+            if (isPaused) {
+                icon.classList.replace('fa-pause', 'fa-play');
+                text.textContent = 'Play';
+            } else {
+                icon.classList.replace('fa-play', 'fa-pause');
+                text.textContent = 'Pause';
+            }
+        }
+
+        // Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Calculateur
+        function calculateGrowth() {
+            const ca = parseFloat(document.getElementById('ca').value) || 50000;
+            const projected = Math.round(ca * 2.65);
+            document.getElementById('caFinal').textContent = projected.toLocaleString('fr-CH');
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        // Formulaire
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('✅ Merci ! Un expert agencyOne à Genève vous contactera dans les 24h pour votre audit gratuit.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
