@@ -1,113 +1,162 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Logo } from "./Logo";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { waLink } from "@/lib/site";
 
 const links = [
-  { href: "#expertises", label: "Expertises" },
-  { href: "#approche", label: "Approche" },
-  { href: "#realisations", label: "Réalisations" },
-  { href: "#methode", label: "Méthode" },
-  { href: "#contact", label: "Contact" },
-];
+  { label: "Services", href: "#services" },
+  { label: "Processus", href: "#process" },
+  { label: "Résultats", href: "#stats" },
+  { label: "Contact", href: "#contact" },
+  ];
 
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const reduce = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-editorial ${
-        scrolled
-          ? "bg-cream/85 backdrop-blur-md border-b border-line"
-          : "bg-transparent border-b border-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-site items-center justify-between px-5 py-4 md:px-8">
-        <a href="#top" aria-label="Agency One — accueil" className="flex items-center gap-2.5">
-          <div className="h-9 w-9">
-            <Logo variant="mark" />
-          </div>
-          <span className="text-sm font-semibold tracking-wider2 uppercase">
-            Agency One
-          </span>
-        </a>
-
-        <div className="hidden items-center gap-9 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-ink-soft transition-colors hover:text-accent"
-            >
-              {l.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-cream transition-colors hover:bg-accent"
-          >
-            Nous contacter
-          </a>
-        </div>
-
-        <button
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center md:hidden"
-        >
-          <div className="space-y-1.5">
-            <span
-              className={`block h-px w-6 bg-ink transition-transform ${
-                open ? "translate-y-[7px] rotate-45" : ""
-              }`}
-            />
-            <span className={`block h-px w-6 bg-ink transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span
-              className={`block h-px w-6 bg-ink transition-transform ${
-                open ? "-translate-y-[7px] -rotate-45" : ""
-              }`}
-            />
-          </div>
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        className={`overflow-hidden border-t border-line bg-cream transition-[max-height] duration-500 ease-editorial md:hidden ${
-          open ? "max-h-96" : "max-h-0 border-transparent"
-        }`}
-      >
-        <div className="flex flex-col gap-1 px-5 py-4">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="py-2.5 text-base text-ink-soft"
-            >
-              {l.label}
-            </a>
-          ))}
-          <a
-            href={waLink("Bonjour Agency One, je souhaite discuter d'un projet.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="mt-2 rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-cream"
-          >
-            WhatsApp — réponse sous 24h
-          </a>
-        </div>
-      </div>
-    </header>
-  );
-}
+        <motion.header
+                initial={{ y: reduce ? 0 : -80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+                style={{
+                          background: scrolled
+                            ? "rgba(255,255,255,0.92)"
+                                      : "rgba(255,255,255,0.7)",
+                          backdropFilter: "blur(16px)",
+                          borderBottom: scrolled ? "1px solid #e0e8ff" : "1px solid transparent",
+                          boxShadow: scrolled ? "0 2px 20px rgba(0,102,255,0.08)" : "none",
+                }}
+              >
+              <nav className="mx-auto max-w-site px-5 md:px-8 flex items-center justify-between h-16 md:h-20">
+                {/* Logo */}
+                      <motion.a
+                                  href="#top"
+                                  whileHover={reduce ? {} : { scale: 1.05 }}
+                                  className="font-black text-xl tracking-tight"
+                                  style={{
+                                                background: "linear-gradient(135deg, #0066FF, #00AAFF)",
+                                                WebkitBackgroundClip: "text",
+                                                WebkitTextFillColor: "transparent",
+                                  }}
+                                >
+                                Agency One
+                      </motion.a>motion.a>
+              
+                {/* Desktop links */}
+                      <ul className="hidden md:flex items-center gap-8">
+                        {links.map((link, i) => (
+                            <motion.li
+                                            key={link.href}
+                                            initial={{ opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.1 + i * 0.08, duration: 0.4 }}
+                                          >
+                                          <a
+                                                            href={link.href}
+                                                            className="relative text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors duration-200 group"
+                                                          >
+                                            {link.label}
+                                                          <span
+                                                                              className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 rounded-full"
+                                                                              style={{ background: "linear-gradient(90deg, #0066FF, #00AAFF)" }}
+                                                                            />
+                                          </a>a>
+                            </motion.li>motion.li>
+                          ))}
+                      </ul>ul>
+              
+                {/* CTA button desktop */}
+                      <motion.a
+                                  href={waLink}
+                                  initial={{ opacity: 0, scale: 0.9 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ delay: 0.5, duration: 0.4 }}
+                                  whileHover={reduce ? {} : { scale: 1.05, boxShadow: "0 0 20px #0066FF66" }}
+                                  whileTap={reduce ? {} : { scale: 0.97 }}
+                                  className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-white transition-all"
+                                  style={{
+                                                background: "linear-gradient(135deg, #0066FF, #00AAFF)",
+                                                boxShadow: "0 2px 12px #0066FF44",
+                                  }}
+                                >
+                                Démarrer →
+                      </motion.a>motion.a>
+              
+                {/* Mobile burger */}
+                      <button
+                                  onClick={() => setOpen(!open)}
+                                  className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-blue-50 transition-colors"
+                                  aria-label="Menu"
+                                >
+                                <motion.span
+                                              animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                                              className="block w-6 h-0.5 bg-blue-600 rounded-full transition-all"
+                                            />
+                                <motion.span
+                                              animate={open ? { opacity: 0 } : { opacity: 1 }}
+                                              className="block w-6 h-0.5 bg-blue-600 rounded-full"
+                                            />
+                                <motion.span
+                                              animate={open ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                                              className="block w-6 h-0.5 bg-blue-600 rounded-full transition-all"
+                                            />
+                      </button>button>
+              </nav>nav>
+        
+          {/* Mobile menu */}
+              <AnimatePresence>
+                {open && (
+                          <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        className="md:hidden overflow-hidden bg-white border-t border-blue-50"
+                                      >
+                                      <ul className="px-5 py-6 flex flex-col gap-4">
+                                        {links.map((link, i) => (
+                                                        <motion.li
+                                                                            key={link.href}
+                                                                            initial={{ opacity: 0, x: -20 }}
+                                                                            animate={{ opacity: 1, x: 0 }}
+                                                                            transition={{ delay: i * 0.07 }}
+                                                                          >
+                                                                          <a
+                                                                                                href={link.href}
+                                                                                                onClick={() => setOpen(false)}
+                                                                                                className="text-lg font-semibold text-gray-700 hover:text-blue-600 transition-colors"
+                                                                                              >
+                                                                            {link.label}
+                                                                          </a>a>
+                                                        </motion.li>motion.li>
+                                                      ))}
+                                                    <motion.li
+                                                                      initial={{ opacity: 0, x: -20 }}
+                                                                      animate={{ opacity: 1, x: 0 }}
+                                                                      transition={{ delay: links.length * 0.07 }}
+                                                                    >
+                                                                    <a
+                                                                                        href={waLink}
+                                                                                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white w-full justify-center"
+                                                                                        style={{ background: "linear-gradient(135deg, #0066FF, #00AAFF)" }}
+                                                                                      >
+                                                                                      Démarrer un projet →
+                                                                    </a>a>
+                                                    </motion.li>motion.li>
+                                      </ul>ul>
+                          </motion.div>motion.div>
+                        )}
+              </AnimatePresence>AnimatePresence>
+        </motion.header>motion.header>
+      );
+}</motion.header>
