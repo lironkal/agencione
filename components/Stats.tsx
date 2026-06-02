@@ -1,30 +1,124 @@
-import { Counter } from "./Counter";
-import { Reveal } from "./Reveal";
+"use client";
+
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 const stats = [
-  { to: 40, suffix: "+", label: "Projets livrés" },
-  { to: 180, suffix: "%", label: "Croissance de trafic moyenne" },
-  { to: 24, suffix: "h", label: "Délai de réponse" },
-  { to: 100, suffix: "%", label: "Clients accompagnés sur-mesure" },
-];
+  { value: 50, suffix: "+", label: "Clients accompagnés", icon: "🏆" },
+  { value: 3, suffix: "×", label: "ROI moyen généré", icon: "📈" },
+  { value: 98, suffix: "%", label: "Taux de satisfaction", icon: "⭐" },
+  { value: 5, suffix: "M+", label: "Impressions générées", icon: "👁️" },
+  ];
+
+function AnimatedNumber({
+    target,
+    suffix,
+    isInView,
+}: {
+    target: number;
+    suffix: string;
+    isInView: boolean;
+}) {
+    const [count, setCount] = useState(0);
+    const reduce = useReducedMotion();
+
+  useEffect(() => {
+        if (!isInView) return;
+        if (reduce) { setCount(target); return; }
+
+                let start = 0;
+        const duration = 1800;
+        const startTime = performance.now();
+
+                const step = (now: number) => {
+                        const elapsed = now - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        setCount(Math.round(eased * target));
+                        if (progress < 1) requestAnimationFrame(step);
+                };
+        requestAnimationFrame(step);
+  }, [isInView, target, reduce]);
+
+  return (
+        <span>
+          {count}
+          {suffix}
+        </span>span>
+      );
+}
 
 export function Stats() {
-  return (
-    <section className="bg-ink py-20 md:py-28">
-      <div className="mx-auto grid max-w-site grid-cols-2 gap-y-12 px-5 md:grid-cols-4 md:px-8">
-        {stats.map((s, idx) => (
-          <Reveal key={s.label} delay={idx * 0.08}>
-            <div className="text-center md:text-left">
-              <div className="font-display text-5xl font-light text-cream md:text-6xl">
-                <Counter to={s.to} suffix={s.suffix} />
-              </div>
-              <p className="mt-3 text-xs uppercase tracking-wider2 text-cream/55">
-                {s.label}
-              </p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-80px" });
+    const reduce = useReducedMotion();
+  
+    return (
+          <section
+                  id="stats"
+                  ref={ref}
+                  className="py-24 md:py-32 relative overflow-hidden"
+                  style={{
+                            background: "linear-gradient(135deg, #0044CC 0%, #0066FF 40%, #0088EE 70%, #00AAFF 100%)",
+                  }}
+                >
+            {/* Background decoration */}
+                <motion.div
+                          animate={reduce ? {} : { scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
+                          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                          className="absolute top-[-20%] right-[-10%] w-96 h-96 rounded-full"
+                          style={{ background: "rgba(255,255,255,0.1)" }}
+                        />
+                <motion.div
+                          animate={reduce ? {} : { scale: [1, 1.2, 1], opacity: [0.05, 0.15, 0.05] }}
+                          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+                          className="absolute bottom-[-20%] left-[-10%] w-96 h-96 rounded-full"
+                          style={{ background: "rgba(255,255,255,0.08)" }}
+                        />
+          
+                <div className="mx-auto max-w-site px-5 md:px-8 relative z-10">
+                        <motion.div
+                                    initial={{ opacity: 0, y: reduce ? 0 : 30 }}
+                                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                    transition={{ duration: 0.7 }}
+                                    className="text-center mb-14"
+                                  >
+                                  <span className="inline-block px-4 py-1.5 rounded-full text-sm font-semibold mb-4 bg-white/20 text-white border border-white/30">
+                                              Nos résultats
+                                  </span>span>
+                                  <h2 className="text-4xl md:text-5xl font-black text-white">
+                                              Des chiffres qui parlent
+                                  </h2>h2>
+                        </motion.div>motion.div>
+                
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                          {stats.map((stat, i) => (
+                              <motion.div
+                                              key={stat.label}
+                                              initial={{ opacity: 0, y: reduce ? 0 : 40, scale: 0.9 }}
+                                              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                                              transition={{ delay: i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                                              whileHover={reduce ? {} : { scale: 1.05, y: -4 }}
+                                              className="rounded-2xl p-6 text-center"
+                                              style={{
+                                                                background: "rgba(255,255,255,0.12)",
+                                                                border: "1px solid rgba(255,255,255,0.2)",
+                                                                backdropFilter: "blur(10px)",
+                                              }}
+                                            >
+                                            <div className="text-4xl mb-3">{stat.icon}</div>div>
+                                            <div className="text-4xl md:text-5xl font-black text-white mb-2">
+                                                            <AnimatedNumber
+                                                                                target={stat.value}
+                                                                                suffix={stat.suffix}
+                                                                                isInView={isInView}
+                                                                              />
+                                            </div>div>
+                                            <p className="text-sm text-white/80 font-medium">{stat.label}</p>p>
+                              </motion.div>motion.div>
+                            ))}
+                        </div>div>
+                </div>div>
+          </section>section>
+        );
+}</span>
