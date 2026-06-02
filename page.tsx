@@ -1,33 +1,33 @@
-import { Nav } from "@/components/Nav";
-import { Hero } from "@/components/Hero";
-import { Marquee } from "@/components/Marquee";
-import { Services } from "@/components/Services";
-import { WhyUs } from "@/components/WhyUs";
-import { Stats } from "@/components/Stats";
-import { Portfolio } from "@/components/Portfolio";
-import { Process } from "@/components/Process";
-import { CtaBand } from "@/components/CtaBand";
-import { Contact } from "@/components/Contact";
-import { Footer } from "@/components/Footer";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { Nav } from "@/Nav";
+import { Hero } from "@/Hero";
+import { Marquee } from "@/Marquee";
+import { Services } from "@/Services";
+import { WhyUs } from "@/WhyUs";
+import { Stats } from "@/Stats";
+import { Portfolio } from "@/Portfolio";
+import { Process } from "@/Process";
+import { CtaBand } from "@/CtaBand";
+import { Contact } from "@/Contact";
+import { Footer } from "@/Footer";
+import { WhatsAppFloat } from "@/WhatsAppFloat";
 
 export default function Home() {
-  return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <Marquee />
-        <Services />
-        <WhyUs />
-        <Stats />
-        <Portfolio />
-        <Process />
-        <CtaBand />
-        <Contact />
-      </main>
-      <Footer />
-      <WhatsAppFloat />
-    </>
-  );
-}
+    return (
+          <>
+                <Nav />
+                <main>
+                        <Hero />
+                        <Marquee />
+                        <Services />
+                        <WhyUs />
+                        <Stats />
+                        <Portfolio />
+                        <Process />
+                        <CtaBand />
+                        <Contact />
+                </main>main>
+                <Footer />
+                <WhatsAppFloat />
+          </>>
+        );
+}</>
